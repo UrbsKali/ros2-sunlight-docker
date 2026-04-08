@@ -35,8 +35,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install ROS 2 Jazzy
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-jazzy-desktop \
-    ros-jazzy-gazebo-ros-pkgs \
-    ros-jazzy-gazebo-ros2-control \
+    ros-jazzy-gz-ros-pkgs \
+    ros-jazzy-gz-ros2-control \
     ros-jazzy-rviz2 \
     ros-jazzy-geometry2 \
     ros-jazzy-tf2-tools \
@@ -47,7 +47,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install GPU utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nvidia-utils \
-    libcuda1-12-2 \
+    libcuda1-13-2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Sunshine (streaming server)
@@ -71,9 +71,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     pkg-config \
-    && wget -q https://github.com/LizardByte/Sunshine/releases/download/v0.23.0/sunshine-ubuntu-22.04-amd64.deb \
-    && dpkg -i sunshine-ubuntu-22.04-amd64.deb \
-    && rm sunshine-ubuntu-22.04-amd64.deb \
+    && wget -q https://github.com/LizardByte/Sunshine/releases/download/v0.23.0/sunshine-ubuntu-24.04-amd64.deb \
+    && dpkg -i sunshine-ubuntu-24.04-amd64.deb \
+    && rm sunshine-ubuntu-24.04-amd64.deb \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install full VS Code (accessed via X11 display)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    libxss1 \
+    libgconf-2-4 \
+    libxkbfile1 \
+    && wget -q https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/code.deb \
+    && dpkg -i /tmp/code.deb || apt-get install -y --no-install-recommends -f \
+    && rm /tmp/code.deb \
     && rm -rf /var/lib/apt/lists/*
 
 # Initialize rosdep
@@ -102,7 +113,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Expose ports
-# Sunshine default port
+# Sunshine ports
 EXPOSE 47989 47990 48010
 
 # Set up display for X11

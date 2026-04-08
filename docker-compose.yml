@@ -24,11 +24,11 @@ services:
     
     # Volumes
     volumes:
+      # Entire home directory for persistence (/root config, .vscode, .local, etc.)
+      - root_home:/root
+      
       # ROS2 workspace for persistence
       - ros2_workspace:/home/ros/ros2_ws
-      
-      # Sunshine config
-      - sunshine_config:/root/.config/sunshine
       
       # X11 display socket for GUI apps (Gazebo, RViz)
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
@@ -62,9 +62,9 @@ services:
         max-file: "3"
 
 volumes:
-  ros2_workspace:
+  root_home:
     driver: local
-  sunshine_config:
+  ros2_workspace:
     driver: local
 
 networks:

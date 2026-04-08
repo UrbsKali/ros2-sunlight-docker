@@ -57,13 +57,19 @@ docker-compose up -d
 docker-compose logs -f
 ```
 
-### 4. Connect with Moonlight
+### 4. Access Services
 
-On your client machine:
-- Install [Moonlight](https://moonlight-stream.org/) (Linux, Windows, Mac, Android, iOS)
+**Moonlight Remote Desktop** (stream VS Code, RViz, Gazebo):
+- Download: https://moonlight-stream.org/
 - Add host: `<server-ip>:48010`
-- Username/Password: Use credentials from `.env` file
-- Connect and stream!
+- Credentials: from `.env` file
+
+**Launch VS Code** (inside container via Moonlight):
+```bash
+docker-compose exec ros2-sunshine bash
+code &
+```
+VS Code will appear in your Moonlight stream window.
 
 ## Architecture
 

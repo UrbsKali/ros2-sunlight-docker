@@ -18,9 +18,7 @@ docker-compose exec ros2-sunshine nvidia-smi
 docker-compose logs ros2-sunshine
 ```
 
-## Common Operations
-
-### Connect Remotely
+## Connect Remotely
 
 **Using Moonlight Client:**
 1. Download: https://moonlight-stream.org/
@@ -28,7 +26,29 @@ docker-compose logs ros2-sunshine
 3. Login with credentials from `.env`
 4. Click to stream!
 
-### Access Container Shell
+## Launch Applications in Moonlight Stream
+
+**VS Code:**
+```bash
+docker-compose exec ros2-sunshine bash
+code &
+```
+
+**RViz:**
+```bash
+docker-compose exec ros2-sunshine bash
+source /opt/ros/jazzy/setup.bash
+rviz2 &
+```
+
+**Gazebo:**
+```bash
+docker-compose exec ros2-sunshine bash
+source /opt/ros/jazzy/setup.bash
+gazebo &
+```
+
+## Access Container Shell
 
 ```bash
 docker-compose exec ros2-sunshine bash
@@ -37,22 +57,7 @@ docker-compose exec ros2-sunshine bash
 source /opt/ros/jazzy/setup.bash
 ```
 
-### Launch ROS2 Applications
-
-```bash
-# RViz (visualization)
-docker-compose exec ros2-sunshine bash
-source /opt/ros/jazzy/setup.bash
-rviz2
-
-# Gazebo (simulation)
-gazebo
-
-# Your custom node
-ros2 run your_package your_executable
-```
-
-### Check Logs
+## Check Logs
 
 ```bash
 # All services
@@ -65,7 +70,7 @@ docker-compose logs -f ros2-sunshine
 docker-compose logs --tail=50
 ```
 
-### Monitor Performance
+## Monitor Performance
 
 ```bash
 # See CPU, Memory, GPU usage
