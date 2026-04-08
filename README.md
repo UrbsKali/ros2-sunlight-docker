@@ -88,7 +88,7 @@ On your client machine:
 
 The Dockerfile automatically detects and uses the NVIDIA GPU:
 
-- **CUDA Version**: 12.2.2 (compatible with GTX 1080 Ti)
+- **CUDA Version**: 13.2.0 (compatible with GTX 1080 Ti)
 - **Encoder**: NVENC (hardware video encoding)
 - **Driver**: Uses host's NVIDIA drivers (mounted via Docker runtime)
 
