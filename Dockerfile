@@ -71,8 +71,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     pkg-config \
-    && wget -q https://github.com/LizardByte/Sunshine/releases/download/v0.23.0/sunshine-ubuntu-24.04-amd64.deb \
-    && dpkg -i sunshine-ubuntu-24.04-amd64.deb \
+    miniupnpc \
+    libayatana-appindicator3-1 \
+    libnotify4 \
+    && wget -q https://github.com/LizardByte/Sunshine/releases/download/v2025.924.154138/sunshine-ubuntu-24.04-amd64.deb \
+    && apt-get install -y --no-install-recommends ./sunshine-ubuntu-24.04-amd64.deb \
     && rm sunshine-ubuntu-24.04-amd64.deb \
     && rm -rf /var/lib/apt/lists/*
 
