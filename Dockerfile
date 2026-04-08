@@ -83,10 +83,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     libxss1 \
-    libgconf-2-4 \
     libxkbfile1 \
     && wget -q https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/code.deb \
-    && dpkg -i /tmp/code.deb || apt-get install -y --no-install-recommends -f \
+    && apt-get install -y --no-install-recommends /tmp/code.deb \
     && rm /tmp/code.deb \
     && rm -rf /var/lib/apt/lists/*
 
