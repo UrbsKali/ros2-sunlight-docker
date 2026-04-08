@@ -23,9 +23,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     supervisor \
     && rm -rf /var/lib/apt/lists/*
 
-# Add ROS 2 repository
-RUN curl -sSL https://repo.ros2.org/ros.key | apt-key add - \
-    && add-apt-repository "deb [arch=$(dpkg --print-architecture)] http://repo.ros2.org/ubuntu $(lsb_release -cs) main"
+# Add ROS 2 repository using modern keyring method
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && mkdir -p /usr/share/keyrings \
+    && curl -sSL https://repo.ros2.org/ros.key -o /root/ros-archive-keyring.gpg \
+    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BABE3D &>/dev/null || true \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://repo.ros2.org/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2.list \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install ROS 2 Jazzy
 RUN apt-get update && apt-get install -y --no-install-recommends \
