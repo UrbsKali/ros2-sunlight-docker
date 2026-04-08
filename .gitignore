@@ -1,0 +1,43 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# ROS2
+build/
+devel/
+install/
+.colcon/
+log/
+
+# Environment
+.env
+.env.local
+!.env.example
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Backups
+backups/
+*.bak
+*.tmp
+
+# Logs
+*.log
+logs/
