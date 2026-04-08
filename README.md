@@ -6,27 +6,18 @@ This Docker configuration runs **ROS2 Jazzy** with **Sunshine** streaming server
 
 - **Linux Server** with Docker and Docker Compose installed
 - **NVIDIA GPU**: GTX 1080 Ti (or compatible NVIDIA GPU)
-- **NVIDIA Docker Runtime**: Install from https://github.com/NVIDIA/nvidia-docker
+- **NVIDIA Container Toolkit**: Install from https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 - **X11 Server**: If running on headless system, install Xvfb or similar
 - **At least 8GB RAM** (16GB+ recommended for Gazebo simulations)
 
 ### NVIDIA Docker Runtime Installation
 
-```bash
-# Ubuntu/Debian
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \
-  sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-sudo apt-get update && sudo apt-get install -y nvidia-docker2
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-```
+Follow the official install guide for your platform: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 
 ### Check GPU Access
 
 ```bash
-docker run --rm --runtime=nvidia --gpus all nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi
+docker run --rm --gpus all nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi
 ```
 
 ## Quick Start
@@ -261,10 +252,10 @@ All variables defined in `.env` file:
 # Check host GPU
 lspci | grep NVIDIA
 
-# Check nvidia-docker installation
-docker run --rm --runtime=nvidia nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi
+# Check GPU access through the NVIDIA Container Toolkit
+docker run --rm --gpus all nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi
 
-# If command not found, reinstall nvidia-docker2
+# If this fails, re-check the NVIDIA Container Toolkit installation
 ```
 
 ### X11 Connection Failed

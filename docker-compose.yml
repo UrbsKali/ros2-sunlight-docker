@@ -5,7 +5,7 @@ services:
     container_name: ros2_sunshine_server
     
     # GPU support - GTX 1080 Ti
-    runtime: nvidia
+    gpus: all
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=graphics,compute,utility

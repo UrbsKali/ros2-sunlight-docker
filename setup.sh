@@ -36,18 +36,18 @@ check_prerequisites() {
     fi
     echo -e "${GREEN}✓ Docker Compose found: $(docker-compose --version)${NC}"
     
-    # Check NVIDIA Docker
-    if ! docker run --rm --runtime=nvidia nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi &>/dev/null; then
-        echo -e "${RED}✗ NVIDIA Docker runtime not configured${NC}"
-        echo "Install nvidia-docker: https://github.com/NVIDIA/nvidia-docker"
+    # Check NVIDIA GPU access
+    if ! docker run --rm --gpus all nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi &>/dev/null; then
+        echo -e "${RED}✗ NVIDIA GPU access is not configured${NC}"
+        echo "Install and configure the NVIDIA Container Toolkit: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html"
         exit 1
     fi
-    echo -e "${GREEN}✓ NVIDIA Docker runtime configured${NC}"
+    echo -e "${GREEN}✓ NVIDIA GPU access configured${NC}"
     
     # Check GPU
     echo ""
     echo "GPU Detected:"
-    docker run --rm --runtime=nvidia nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi -L
+    docker run --rm --gpus all nvidia/cuda:12.2.2-runtime-ubuntu22.04 nvidia-smi -L
     echo ""
 }
 
