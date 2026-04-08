@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install ROS 2 Jazzy
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-jazzy-desktop \
-    ros-jazzy-ros-gz \    
+    ros-jazzy-ros-gz \
     ros-jazzy-gz-ros2-control \
     ros-jazzy-rviz2 \
     ros-jazzy-geometry2 \
@@ -48,11 +48,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
 
-# Install GPU utilities
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    nvidia-utils \
-    libcuda1-13-2 \
-    && rm -rf /var/lib/apt/lists/*
+# GPU driver libraries are provided by the NVIDIA Container Toolkit at runtime.
 
 # Install Sunshine (streaming server)
 RUN apt-get update && apt-get install -y --no-install-recommends \
