@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     software-properties-common \
     wget \
+    micro \
+    btop \
     git \
     build-essential \
     cmake \
@@ -35,12 +37,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install ROS 2 Jazzy
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-jazzy-desktop \
-    ros-jazzy-gz-ros-pkgs \
+    ros-jazzy-ros-gz \    
     ros-jazzy-gz-ros2-control \
     ros-jazzy-rviz2 \
     ros-jazzy-geometry2 \
     ros-jazzy-tf2-tools \
     python3-rosdep \
+    python3-venv \
+    python3-pip \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
 
