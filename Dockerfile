@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gnupg \
     lsb-release \
     ca-certificates \
+    openssl \
     apt-transport-https \
     software-properties-common \
     wget \
@@ -113,7 +114,8 @@ COPY sunshine.conf /root/.config/sunshine/sunshine.conf
 
 # Create entrypoint script
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY preinstall.sh /preinstall.sh
+RUN chmod +x /entrypoint.sh /preinstall.sh
 
 # Expose ports
 # Sunshine ports

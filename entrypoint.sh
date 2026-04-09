@@ -47,6 +47,13 @@ if [ ! -e /tmp/.X11-unix/0 ]; then
     echo "X11 forwarding may not work properly."
 fi
 
+# First-boot setup tasks (idempotent)
+if [ -x /preinstall.sh ]; then
+    /preinstall.sh
+else
+    echo "WARNING: /preinstall.sh is missing or not executable; skipping first-boot setup."
+fi
+
 echo "Starting Supervision..."
 echo "========================================="
 
