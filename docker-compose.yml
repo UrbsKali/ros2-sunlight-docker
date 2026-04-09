@@ -9,9 +9,9 @@ services:
       resources:
         reservations:
           devices:
-            - driver: cdi
-              device_ids:
-                - nvidia.com/gpu=all
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
