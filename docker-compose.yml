@@ -3,58 +3,64 @@ services:
     build: .
     image: ros2-jazzy-sunshine:latest
     container_name: ros2_sunshine_server
-    
+
     # GPU support - GTX 1080 Ti
-    gpus: all
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              device_ids:
+                - nvidia.com/gpu=all
+
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=graphics,compute,utility
       - DISPLAY=${DISPLAY}
       - SUNSHINE_USERNAME=${SUNSHINE_USERNAME:-admin}
       - SUNSHINE_PASSWORD=${SUNSHINE_PASSWORD:-change_me}
-    
+
     # Network
     ports:
-      - "47989:47989/tcp"  # Sunshine control protocol
-      - "47989:47989/udp"  # Sunshine control protocol
-      - "47990:47990/tcp"  # Sunshine video stream
-      - "47990:47990/udp"  # Sunshine video stream
-      - "48010:48010/tcp"  # Sunshine websocket
-      - "48010:48010/udp"  # Sunshine websocket
-    
+      - "47989:47989/tcp" # Sunshine control protocol
+      - "47989:47989/udp" # Sunshine control protocol
+      - "47990:47990/tcp" # Sunshine video stream
+      - "47990:47990/udp" # Sunshine video stream
+      - "48010:48010/tcp" # Sunshine websocket
+      - "48010:48010/udp" # Sunshine websocket
+
     # Volumes
     volumes:
       # Entire home directory for persistence (/root config, .vscode, .local, etc.)
       - root_home:/root
-      
+
       # ROS2 workspace for persistence
       - ros2_workspace:/home/ros/ros2_ws
-      
+
       # X11 display socket for GUI apps (Gazebo, RViz)
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /etc/localtime:/etc/localtime:ro
-    
+
     # Device access
     devices:
-      - /dev/dri:/dev/dri  # GPU device
-      - /dev/fuse:/dev/fuse  # For mounting filesystems if needed
-    
+      - /dev/dri:/dev/dri # GPU device
+      - /dev/fuse:/dev/fuse # For mounting filesystems if needed
+
     # Capabilities for Sunshine
     cap_add:
       - SYS_ADMIN
       - NET_ADMIN
       - SYS_NICE
-    
+
     # Privileged mode (alternative to specific caps, less secure)
     # privileged: true
-    
+
     # Allow display connection
     ipc: host
-    
+
     # Restart policy
     restart: unless-stopped
-    
+
     # Logging
     logging:
       driver: "json-file"
