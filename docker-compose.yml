@@ -4,16 +4,6 @@ services:
     image: ros2-jazzy-sunshine:latest
     container_name: ros2_sunshine_server
 
-    # GPU support - GTX 1080 Ti
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities:
-                - gpu
-
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=graphics,compute,utility
@@ -44,6 +34,7 @@ services:
 
     # Device access
     devices:
+      - nvidia.com/gpu=all # Match docker run CDI GPU selection
       - /dev/dri:/dev/dri # GPU device
       - /dev/fuse:/dev/fuse # For mounting filesystems if needed
 

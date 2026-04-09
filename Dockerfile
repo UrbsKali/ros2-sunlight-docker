@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3-dev \
     supervisor \
+    xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 # Add ROS 2 repository using official ROS2 setup script
