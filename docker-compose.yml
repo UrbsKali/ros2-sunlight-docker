@@ -20,10 +20,10 @@ services:
     # Volumes
     volumes:
       # Entire home directory for persistence (/root config, .vscode, .local, etc.)
-      - root_home:/root
+      - ./root:/root
 
       # ROS2 workspace for persistence
-      - ros2_workspace:/home/ros/ros2_ws
+      - ./ros2_ws:/home/ros/ros2_ws
 
       # X11 display socket for GUI apps (Gazebo, RViz)
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
@@ -57,12 +57,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
-volumes:
-  root_home:
-    driver: local
-  ros2_workspace:
-    driver: local
 
 networks:
   default:
