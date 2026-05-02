@@ -67,6 +67,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcap-dev \
     x11-utils \
     xauth \
+    dbus \
+    dbus-x11 \
+    avahi-daemon \
+    pulseaudio \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Sunshine from GitHub releases

@@ -28,6 +28,10 @@ fi
 # Create log directory for supervisor
 mkdir -p /var/log/supervisor
 
+# Create dbus directory
+mkdir -p /var/run/dbus
+rm -f /var/run/dbus/pid
+
 # Check GPU availability
 echo "Checking GPU availability..."
 if command -v nvidia-smi &> /dev/null; then

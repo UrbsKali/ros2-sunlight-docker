@@ -34,6 +34,7 @@ services:
       - nvidia.com/gpu=all # Match docker run CDI GPU selection
       - /dev/dri:/dev/dri # GPU device
       - /dev/fuse:/dev/fuse # For mounting filesystems if needed
+      - /dev/uinput:/dev/uinput # Required for Sunshine virtual inputs
 
     # Capabilities for Sunshine
     cap_add:
