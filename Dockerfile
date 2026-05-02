@@ -119,7 +119,9 @@ RUN chmod +x /entrypoint.sh /preinstall.sh
 
 # Expose ports
 # Sunshine ports
-EXPOSE 47989 47990 48010
+EXPOSE 47984-47990/tcp
+EXPOSE 48010
+EXPOSE 47998-48000/udp
 
 # Set up display for X11
 ENV DISPLAY=:0

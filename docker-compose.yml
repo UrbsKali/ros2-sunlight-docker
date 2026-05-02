@@ -13,12 +13,9 @@ services:
 
     # Network
     ports:
-      - "47989:47989/tcp" # Sunshine control protocol
-      - "47989:47989/udp" # Sunshine control protocol
-      - "47990:47990/tcp" # Sunshine video stream
-      - "47990:47990/udp" # Sunshine video stream
-      - "48010:48010/tcp" # Sunshine websocket
-      - "48010:48010/udp" # Sunshine websocket
+      - "47984-47990:47984-47990/tcp"
+      - "48010:48010"
+      - "47998-48000:47998-48000/udp"
 
     # Volumes
     volumes:
