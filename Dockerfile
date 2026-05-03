@@ -95,9 +95,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm /tmp/code.deb \
     && rm -rf /var/lib/apt/lists/*
 
-# Install GNOME Desktop Environment
+# Install XFCE4 Desktop Environment (Docker friendly, unlike GNOME)
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    ubuntu-desktop \
+    xfce4 \
+    xfce4-goodies \
     && rm -rf /var/lib/apt/lists/*
 
 # Initialize rosdep
